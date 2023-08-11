@@ -63,7 +63,7 @@ export const networkPlot = () => {
             .selectAll("circle")
             .data(precomputedPositions)
             .join("circle")
-            .attr("r", 5)
+            .attr("r", 4)
             .attr("fill", (d) => colours[d.tau])
             .attr("class", "network")
             .attr("id", (d) => d.id)

@@ -45,7 +45,7 @@ async function main() {
             left: 30,
             left: width / 2,
         })
-        .size(5)
+        .size(4)
         .xValue((d) => d.x_emb)
         .yValue((d) => d.y_emb)
         .yAxisLabel("Embedding Dimension 2")
