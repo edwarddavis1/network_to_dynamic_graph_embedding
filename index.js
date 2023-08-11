@@ -79,15 +79,16 @@ async function main() {
 
     svg.call(network);
 
+    const K = 3;
     let graphDataList = [];
     let springPositionsList = [];
-    for (let t = 0; t < 4; t++) {
+    for (let t = 0; t < K; t++) {
         graphDataList.push(await loadGraph(t));
         springPositionsList.push(await loadSpringPositions(t));
     }
     // let i = 0;
     function update(i) {
-        t = (t + 1) % 4;
+        t = (t + 1) % K;
 
         // remove all network class things
         svg.selectAll(".network").remove();

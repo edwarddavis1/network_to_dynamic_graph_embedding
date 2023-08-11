@@ -63,7 +63,7 @@ def make_dynamic_network(n, T=2, move_prob=0.4, K=2):
 
 
 # %%
-K = 4
+K = 3
 n = K * 50
 T = K
 As, tau = make_dynamic_network(n, T=T, move_prob=0.3, K=K)
