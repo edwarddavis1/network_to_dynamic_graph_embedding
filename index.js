@@ -86,22 +86,45 @@ async function main() {
         graphDataList.push(await loadGraph(t));
         springPositionsList.push(await loadSpringPositions(t));
     }
-    // let i = 0;
-    function update(i) {
-        t = (t + 1) % K;
 
-        // remove all network class things
-        svg.selectAll(".network").remove();
+    // place play and pause buttons at the top left of the page
 
-        scatter.data(embeddingData.filter((d) => d.t == t));
-        svg.call(scatter);
+    const playButton = d3
+        .select("body")
+        .append("button")
+        .text("Play")
+        .style("position", "absolute")
+        .style("bottom", "0px")
+        .style("left", "0px");
 
-        network.data(graphDataList[t]);
-        network.precomputedPositions(springPositionsList[t]);
-        svg.call(network);
-    }
+    const pauseButton = d3
+        .select("body")
+        .append("button")
+        .text("Pause")
+        .style("position", "absolute")
+        .style("bottom", "0px")
+        .style("left", "100px");
 
-    setInterval(update, 1000);
+    let intervalId;
+    playButton.on("click", () => {
+        intervalId = setInterval(() => {
+            t = (t + 1) % K;
+
+            // remove all network class things
+            svg.selectAll(".network").remove();
+
+            scatter.data(embeddingData.filter((d) => d.t == t));
+            svg.call(scatter);
+
+            network.data(graphDataList[t]);
+            network.precomputedPositions(springPositionsList[t]);
+            svg.call(network);
+        }, 1000);
+    });
+
+    pauseButton.on("click", () => {
+        clearInterval(intervalId);
+    });
 }
 
 main();
